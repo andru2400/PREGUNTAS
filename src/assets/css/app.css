@@ -1,0 +1,45 @@
+.line-s-number {
+    width: 50px;
+    height: 1px;
+    background: hsl(228, 12%, 92%);
+    position: relative;
+    top: 0px;
+}
+
+.h-preguntas{
+    height: 400px;
+}
+.h-step-two{
+    height: 300px;
+}
+
+.circle-step-three{
+    height:200px;
+    width:200px;
+    background:#E76AFA;
+    -moz-border-radius:100px;
+    -webkit-border-radius:100px;
+    border-radius:100px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+.step-8{
+    height:160px;
+    width:160px;
+}
+
+/* .circle-step-three-f{
+    height:250px;
+    width:250px;
+    background:#E76AFA;
+    -moz-border-radius:100px;
+    -webkit-border-radius:100px;
+    border-radius:120px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    
+} */
