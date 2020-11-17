@@ -1,3 +1,20 @@
+.line{    
+    border: 1px solid #ffffff;    
+}
+
+.line2{    
+    border: 1px solid #761212;    
+    border-style: dotted;        
+}
+
+.h-1-pag{
+    height: 320px;
+}
+
+.h-2-pag{
+    height: 150px;
+}
+
 .line-s-number {
     width: 50px;
     height: 1px;
@@ -7,11 +24,17 @@
 }
 
 .h-preguntas{
-    height: 400px;
+    height: 380px;
 }
+
+.h-step-one{
+    height: 260px;
+}
+
 .h-step-two{
     height: 300px;
 }
+
 
 .circle-step-three{
     height:200px;
@@ -31,6 +54,9 @@
     width:160px;
 }
 
+.step-9{
+    height:260px;    
+}
 /* .circle-step-three-f{
     height:250px;
     width:250px;

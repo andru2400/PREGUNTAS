@@ -1,278 +1,280 @@
 <template>
   <div>
     <div class="bd-example bd-example-tabs">
+      <div class="tab-content" id="pills-tabContent">
+          <!-- 1 -->
+          <div class="tab-pane fade  active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+            <div class="h-preguntas">
+              <div class="row">
+                <div class="col">
+                    <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                    <h6 v-text="questions[0].description"></h6>                
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm bg-primary h-step-one border" v-for="(answer,i) in questions[0].answers" v-bind:key="i+'A'">
+                    <input type="radio" :value="answer.id" v-model="questions[0].result"> <span v-text="answer.name"></span>
+                </div>                
+              </div>                            
+            </div>
+            <div class="d-flex justify-content-around">              
+              <button type="button" class="btn btn-success" v-if="questions[0].result" @click="stepTwo()">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>            
+          </div>
+          <!-- 2 -->
+          <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+            <div class="h-preguntas">                            
+                <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[1].description"></h6>                
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm bg-primary h-step-two border" v-for="(answer,i) in questions[1].answers" v-bind:key="i+'_B'">
+                    <input type="radio" :value="answer.id" v-model="questions[1].result">  <span v-text="answer.name"></span>
+                  </div>                  
+                </div>              
+            </div>
+            <div class="d-flex justify-content-around">
+              <button type="button" class="btn btn-light" @click="stepOne()">Atras</button>
+              <button type="button" class="btn btn-success" @click="stepThree()" v-if="questions[1].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
+            <div class="h-preguntas"> 
+                <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[2].description"></h6>                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm bg-primary h-step-two border" v-for="(answer,i) in questions[2].answers" v-bind:key="i+'C'">
+                        <input type="radio" :value="answer.id" v-model="questions[2].result">  <span v-text="answer.name"></span>
+                    </div>                    
+                </div>                                         
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepTwo()">Atras</button>              
+              <button type="button" class="btn btn-success" @click="stepFour()" v-if="questions[2].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
+            <div class="h-preguntas">
+                <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[3].description"></h6>                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm bg-primary h-step-two border" v-for="(answer,i) in questions[3].answers" v-bind:key="i+'D'">
+                        <input type="radio" :value="answer.id" v-model="questions[3].result">  <span v-text="answer.name"></span>
+                    </div>                    
+                </div>                                                       
+              <h1><span class="badge badge-dark rounded p-3"></span></h1>                                            
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepThree()">Atras</button>              
+              <button type="button" class="btn btn-success" @click="stepFive()" v-if="questions[3].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="tab-pane fade" id="pills-5" role="tabpanel" aria-labelledby="pills-5-tab">
+            <div class="h-preguntas">
+                <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[4].description"></h6>                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm bg-primary h-step-two border"  v-for="(answer,i) in questions[4].answers" v-bind:key="i+'E'">
+                        <input type="radio" :value="answer.id" v-model="questions[4].result">  <span v-text="answer.name"></span>
+                    </div>                    
+                </div>
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepFour()">Atras</button>              
+              <button type="button" class="btn btn-success" @click="stepSix()" v-if="questions[4].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="tab-pane fade" id="pills-6" role="tabpanel" aria-labelledby="pills-6-tab">
+            <div class="h-preguntas">
+              <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[5].description"></h6>                
+                    </div>
+              </div>                                                    
+              <div class="row">
+                  <div class="col-sm bg-primary h-step-two border" v-for="(answer,i) in questions[5].answers" v-bind:key="i+'F'">
+                    <input type="radio" :value="answer.id" v-model="questions[5].result"> <span v-text="answer.name"></span>
+                  </div>                  
+              </div>
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepFive()">Atras</button>              
+              <button type="button" class="btn btn-success" @click="stepSeven()" v-if="questions[5].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="tab-pane fade" id="pills-7" role="tabpanel" aria-labelledby="pills-7-tab">
+            <div class="h-preguntas">
+               <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[6].description"></h6>                
+                    </div>
+              </div>                                                                   
+              <h1><span class="badge badge-dark rounded p-3"></span></h1>                              
+              <div class="row">
+                  <div class="col-sm bg-primary m-2 p-3" v-for="(answer,i) in questions[6].answers" v-bind:key="i+'G'">
+                    <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                    <input type="radio" :value="answer.id" v-model="questions[6].result"> <span v-text="answer.name"></span>
+                  </div>                  
+              </div>
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepSix()">Atras</button>              
+              <button type="button" class="btn btn-success" @click="stepEight()" v-if="questions[6].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="tab-pane fade" id="pills-8" role="tabpanel" aria-labelledby="pills-8-tab">
+            <div class="h-preguntas">              
+              <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">
+                        <h6 v-text="questions[7].description"></h6>                
+                    </div>
+              </div>                                                                                 
+              <div class="row">
+                 <div class="col-sm bg-primary h-step-two border"  v-for="(answer,i) in questions[7].answers" v-bind:key="i+'H'">
+                        <input type="radio" :value="answer.id" v-model="questions[7].result">  <span v-text="answer.name"></span>
+                    </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepSeven()">Atras</button>
+              <button type="button" class="btn btn-success" @click="stepNine()" v-if="questions[7].result">Siguiente</button>
+              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="tab-pane fade" id="pills-9" role="tabpanel" aria-labelledby="pills-9-tab">
+            <div class="h-preguntas">              
+              <div class="row">
+                    <div class="col">
+                        <img src="img_girl.jpg" alt="definir" width="500" height="600">                        
+                    </div>
+              </div>                                                                                 
+              <div class="row">
+                <div class="col bg-info">
+                    <h6>El carro recomendado para ti es ...</h6>                
+                    <span v-text="this.element.vehiculoFinal.name"></span>
+                </div>
+                <div class="col bg-primary">
+                    <form action="accion.php" method="post">
+                        <h6>INGRESA TUS DATOS DE CONTACTO Y CONOCE LOS DIFERENTES PLANES PARA OBTENERLO</h6>                
+                        <div class="form-group">                            
+                            <input type="text" class="form-control" v-model="element.nombres" id="formGroupExampleInput" placeholder="Nombres">
+                        </div>
+                        <div class="form-group">                            
+                            <input type="text" class="form-control" v-model="element.apellidos" id="formGroupExampleInput" placeholder="Apellidos">
+                        </div>
+                        <div class="form-group">                            
+                            <input type="email" class="form-control" v-model="element.email" id="formGroupExampleInput2" placeholder="Email">
+                        </div>
+                        <div class="form-group">                            
+                            <input type="text" class="form-control"  v-model="element.celular" id="formGroupExampleInput2" placeholder="Celular">
+                        </div>
+                        <input type="checkbox" class="" v-model="element.acepto"> Autorizo el uso de mis datos...
+                        <input type="checkbox" class="" v-model="element.aceptoInformación"> Acepto recibir ...
+                        <button type="button" class="btn btn-dark" v-on:click="SendInfo()">Enviar</button>
+                        <!-- <input type="submit" class="btn btn-dark" value="enviar"> -->
+                        <input type="button" class="btn btn-dark" @click="qualification()" value="enviar">
+                    </form>
+                </div>                
+              </div>                          
+            </div>
+            <div class="d-flex justify-content-around">            
+              <button type="button" class="btn btn-light" @click="stepEight()">Atras</button>              
+            </div>
+          </div>
+      </div>
       <ul class="nav nav-pills mb-3 d-flex justify-content-center align-items-center" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active rounded-circle" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">1</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerOne">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[0].result">
             <a class="nav-link rounded-circle" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false">2</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle">2</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerTwo">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[1].result">
             <a class="nav-link rounded-circle" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false">3</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >3</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerThree">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[2].result">
             <a class="nav-link rounded-circle" id="pills-4-tab" data-toggle="pill" href="#pills-4" role="tab" aria-controls="pills-4" aria-selected="false">4</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >4</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerFour">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[3].result">
             <a class="nav-link rounded-circle" id="pills-5-tab" data-toggle="pill" href="#pills-5" role="tab" aria-controls="pills-5" aria-selected="false">5</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >5</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerFive">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[4].result">
             <a class="nav-link rounded-circle" id="pills-6-tab" data-toggle="pill" href="#pills-6" role="tab" aria-controls="pills-6" aria-selected="false">6</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >6</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerSix">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[5].result">
             <a class="nav-link rounded-circle" id="pills-7-tab" data-toggle="pill" href="#pills-7" role="tab" aria-controls="pills-7" aria-selected="false">7</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >7</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerSeven">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[6].result">
             <a class="nav-link rounded-circle" id="pills-8-tab" data-toggle="pill" href="#pills-8" role="tab" aria-controls="pills-8" aria-selected="false">8</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >8</a>
           </li>
-            <div class="line-s-number"></div>
-          <li class="nav-item" role="presentation" v-if="answerEight">
+            <!-- <div class="line-s-number"></div> -->
+          <li class="nav-item" role="presentation" v-if="questions[7].result">
             <a class="nav-link rounded-circle" id="pills-9-tab" data-toggle="pill" href="#pills-9" role="tab" aria-controls="pills-9" aria-selected="false">9</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >9</a>
           </li>
       </ul>
-      <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade  active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
-            <div class="h-preguntas">
-              <h1><span class="badge badge-dark rounded p-3">¿Cómo consideras que es tu forma de manejar?</span></h1>                
-              <ul class="list-group m-3">                
-                <li class="list-group-item"><input type="radio" value="1" v-model="answerOne"> Serena y Relajada</li>
-              </ul>                          
-              <ul class="list-group m-3">                
-                <li class="list-group-item"><input type="radio" value="2" v-model="answerOne"> Suave y elegante</li>
-              </ul>                          
-              <ul class="list-group m-3">                                
-                <li class="list-group-item"><input type="radio" value="3" v-model="answerOne"> Ligera y veloz</li>              
-              </ul>                          
-              <ul class="list-group m-3">                                
-                <li class="list-group-item"><input type="radio" value="4" v-model="answerOne"> Versátil y poderosa</li>
-              </ul>                          
-            </div>
-            <div>              
-              <button type="button" class="btn btn-success" v-if="answerOne" @click="stepTwo()">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>            
-          </div>
-          <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">¿Cómo prefieres que sea tu pareja ideal?</span></h1>                
-                <div class="row">
-                  <div class="col-sm bg-primary h-step-two">
-                    <input type="radio" value="1" v-model="answerTwo"> Practica
-                  </div>
-                  <div class="col-sm bg-secondary h-step-two">
-                    <input type="radio" value="2" v-model="answerTwo"> Confortable
-                  </div>
-                  <div class="col-sm bg-success h-step-two">
-                    <input type="radio" value="3" v-model="answerTwo"> Elegante
-                  </div>
-                  <div class="col-sm bg-info h-step-two">
-                    <input type="radio" value="4" v-model="answerTwo"> Aventurera
-                  </div>
-                    <div class="col-sm bg-dark h-step-two">
-                    <input type="radio" value="5" v-model="answerTwo"> Fuerte
-                  </div>
-                </div>              
-            </div>
-            <div class="d-flex justify-content-around">
-              <button type="button" class="btn btn-light" @click="stepOne()">Atras</button>
-              <button type="button" class="btn btn-success" @click="stepThree()" v-if="answerTwo">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
-            <div class="h-preguntas">              
-              <div class="bg-info d-flex justify-content-around">
-                <input type="radio" value="1" v-model="answerThree"> Salir a viajar por carretera
-                <input type="radio" value="2" v-model="answerThree"> Dar un paseo por la ciudad
-                <div class="circle-step-three">
-                  ¿Qué experiencia disfrutarías más con tu pareja ideal?
-                </div>
-                <input type="radio" value="3" v-model="answerThree"> Disfrutar momentos en familia
-                <input type="radio" value="4" v-model="answerThree"> Trabajar hombro a hombro
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepTwo()">Atras</button>              
-              <button type="button" class="btn btn-success" @click="stepFour()" v-if="answerThree">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">¿Te encantaría llevar de copiloto a...?</span></h1>                              
-              <div class="row">
-                  <div class="col-sm bg-primary h-step-two">
-                    <div class="bg-info p-4 m-3">
-                      <input type="radio" value="1" v-model="answerFour"> Tu pareja con ella hasta el fin del mundo
-                    </div>
-                    <div class="bg-info p-4 m-3">
-                      <input type="radio" value="2" v-model="answerFour"> A quien quiera unirse la aventura
-                    </div>                    
-                    <div class="bg-info p-4 m-3">
-                      <input type="radio" value="3" v-model="answerFour"> Cuanto mas gente mejor para conocer la ciudad
-                    </div>                                        
-                  </div>
-                  <div class="col-sm bg-secondary h-step-two">
-                    <div class="p-5" v-if="answerFour === '1'">
-                      Imagen de carro 1
-                    </div>
-                    <div class="p-5" v-else-if="answerFour === '2'">
-                      Imagen de carro 2
-                    </div>
-                    <div  class="p-5" v-else-if="answerFour === '3'">
-                      Imagen de carro 3
-                    </div>
-                    <div class="p-5" v-else>
-                      Escoge ...
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepThree()">Atras</button>              
-              <button type="button" class="btn btn-success" @click="stepFive()" v-if="answerFour">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-5" role="tabpanel" aria-labelledby="pills-5-tab">
-            <div class="h-preguntas">
-              <div class="row">
-                  <div class="col-sm bg-primary h-step-two">
-                    <input type="radio" value="1" v-model="answerFive">Vas conduciendo y te encuentras una bifurcación IMG
-                  </div>
-                  <div class="col-sm bg-secondary h-step-two">
-                    <input type="radio" value="2" v-model="answerFive">Terreno agreste con desniveles IMG
-                  </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepFour()">Atras</button>              
-              <button type="button" class="btn btn-success" @click="stepSix()" v-if="answerFive">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-6" role="tabpanel" aria-labelledby="pills-6-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">¿Qué cualidades valorarías más en tu pareja ideal?.</span></h1>                              
-              <div class="row">
-                  <div class="col-sm bg-primary h-step-two">
-                    <input type="radio" value="1" v-model="answerSix"> Que sea deportiva
-                  </div>
-                  <div class="col-sm bg-secondary h-step-two">
-                    <input type="radio" value="2" v-model="answerSix"> Que cargue suficiente equipaje
-                  </div>
-                  <div class="col-sm bg-success h-step-two">
-                    <input type="radio" value="3" v-model="answerSix"> Que sea deportiva 2
-                  </div>
-                  <div class="col-sm bg-info h-step-two">
-                    <input type="radio" value="4" v-model="answerSix"> Qu su imagen exterior impacte
-                  </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepFive()">Atras</button>              
-              <button type="button" class="btn btn-success" @click="stepSeven()" v-if="answerSix">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-7" role="tabpanel" aria-labelledby="pills-7-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">Escoge la familia que quisieras conformar con tu pareja ideal.</span></h1>                              
-              <div class="row">
-                  <div class="col-sm bg-primary m-2 p-3">
-                    img
-                    <input type="radio" value="1" v-model="answerSeven"> Hatchback
-                  </div>
-                  <div class="col-sm bg-secondary m-2 p-3">
-                    img
-                    <input type="radio" value="2" v-model="answerSeven"> Sedan
-                  </div>
-                  <div class="col-sm bg-success m-2 p-3">
-                    img
-                    <input type="radio" value="3" v-model="answerSeven"> SUV
-                  </div>
-                  <div class="col-sm bg-info m-2 p-3">
-                    img
-                    <input type="radio" value="4" v-model="answerSeven"> Pick-Up
-                  </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepSix()">Atras</button>              
-              <button type="button" class="btn btn-success" @click="stepEight()" v-if="answerSeven">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-8" role="tabpanel" aria-labelledby="pills-8-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">¿Qué tipo de experiencia disfrutarías más con tu pareja?</span></h1>                              
-              <div class="row">
-                <div class="col bg-info step-8"><input type="radio" value="1" v-model="answerEight"> Start</div>
-                <div class="col bg-primary step-8"><input type="radio" value="2" v-model="answerEight"> Confortable</div>
-                <div class="w-100"></div>
-                <div class="col bg-primary step-8"><input type="radio" value="3" v-model="answerEight"> Pick-Up</div>
-                <div class="col bg-info step-8"><input type="radio" value="4" v-model="answerEight"> Pick-Up</div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepSeven()">Atras</button>
-              <button type="button" class="btn btn-success" @click="stepNine()" v-if="answerEight">Siguiente</button>
-              <button type="button" class="btn btn-danger" v-else >Siguiente</button>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-9" role="tabpanel" aria-labelledby="pills-9-tab">
-            <div class="h-preguntas">              
-              <h1><span class="badge badge-dark rounded p-3">El carro recomendado para ti es ...</span></h1>                              
-              Llena tu información para poder contactarte ...
-              <form>
-                <div class="form-group">
-                  <label for="formGroupExampleInput">Nombre</label>
-                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                  <label for="formGroupExampleInput2">Celular</label>
-                  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Celular">
-                </div>
-              </form>
-            </div>
-            <div class="d-flex justify-content-around">            
-              <button type="button" class="btn btn-light" @click="stepEight()">Atras</button>
-              <button type="button" class="btn btn-primary" v-on:click="SendInfo()">Enviar</button>
-            </div>
-          </div>
-      </div>
     </div>
   </div>
 </template>
@@ -281,19 +283,313 @@
 export default {
   name: 'Questionary',
   data () {
-    return {
-      answerOne:'',
-      answerTwo:'',
-      answerThree:'',
-      answerFour:'',
-      answerFive:'',
-      answerSix:'',
-      answerSeven:'',
-      answerEight:'',
-      answerNine:'',      
+    return {      
+      questions:[
+        {
+          'id':1 ,
+          'description':'¿CÓMO CONSIDERAS QUE ES TU FORMA DE MANEJAR?',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Serena y relajada',
+              'idLines':[12,3,2]
+            },
+            {
+              'id':2,
+              'name':'Suave y elegante',
+              'idLines':[6,8,11]
+            },
+            {
+              'id':3,
+              'name':'Ligera y veloz',
+              'idLines':[5,9,4]
+            },
+            {
+              'id':4,
+              'name':'Versátil y poderosa',
+              'idLines':[7,1,9,8,10]
+            },
+          ]          
+        },
+        {
+          'id':2 ,
+          'description':'¿CÓMO PREFIERES QUE SEA TU PAREJA IDEAL?',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Práctica',
+              'idLines':[3,12,6,7]
+            },
+            {
+              'id':2,
+              'name':'Confortable',
+              'idLines':[9,10,8,4,5,11]
+            },
+            {
+              'id':3,
+              'name':'Elegante',
+              'idLines':[5,10,8,11,9,4]
+            },
+            {
+              'id':4,
+              'name':'Aventurera',
+              'idLines':[2,1,9]
+            },
+            {
+              'id':5,
+              'name':'Fuerte',
+              'idLines':[9,10,8]
+            },
+          ]          
+        },
+        {
+          'id':3 ,
+          'description':'¿QUÉ EXPERIENCIA DISFRUTARÍAS MÁS CON TU PAREJA IDEAL?',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Dar un paseo por la ciudad',
+              'idLines':[3,6,11,8,12,2]
+            },
+            {
+              'id':2,
+              'name':'Salir a viajar por carretera',
+              'idLines':[5,4,8,9,10]
+            },
+            {
+              'id':3,
+              'name':'Disfrutar momentos en familia',
+              'idLines':[12,8,9,11,5]
+            },
+            {
+              'id':4,
+              'name':'Trabajar hombro a hombro',
+              'idLines':[7,1]
+            },
+          ]          
+        },
+        {
+          'id':4 ,
+          'description':'TE ENCANTARÍA LLEVAR DE COPILOTO A ...',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Tu pareja, con ella hasta el fin del mundo',
+              'idLines':[3,6,4,2]
+            },
+            {
+              'id':2,
+              'name':'A quien quiera unirse a la aventura',
+              'idLines':[7,9,10,8,1]
+            },
+            {
+              'id':3,
+              'name':'Cuanta más gente mejor para conocer la ciudad',
+              'idLines':[12,5,6,11,9]
+            },            
+          ]          
+        },
+        {
+          'id':5 ,
+          'description':'VAS CONDUCIENDO Y TE ENCUENTRAS CON UNA BIFURACIÓN. UN CAMINO ES CLARO, DESPEJADO Y SEÑALIZADO; EL OTRO ES UN TERRENO AGRESTE CON DESNIVELES PRONUNCIADOS Y MUCHO BARRO. ',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Escoges el camino despejado',
+              'idLines':[3,4,6,11,5,12,7,2]
+            },
+            {
+              'id':2,
+              'name':'Te vas por el camino con desniveles y ¡que empiece la aventura!',
+              'idLines':[9,10,8,1]
+            },            
+          ]          
+          
+        },
+        {
+          'id':6 ,
+          'description':'¿QUÉ CUALIDADES VALORARÍAS MÁS EN TU PAREJA IDEAL?',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Que sea deportiva',
+              'idLines':[3,4]
+            },
+            {
+              'id':2,
+              'name':'Que cargue suficiente equipaje',
+              'idLines':[12,11,7,9,10,8,1]
+            },
+            {
+              'id':3,
+              'name':'Que sea exclusiva',
+              'idLines':[5,6,9,10,8]
+            },
+            {
+              'id':4,
+              'name':'Que su imagen exterior impacte',
+              'idLines':[5,4,6,9,10]
+            },
+          ]          
+        },
+        {
+          'id':7 ,
+          'description':'ESCOGE LA FAMILIA QUE QUISIERAS CONFORMAR CON TU PAREJA IDEAL',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Hatchback',
+              'idLines':[3,2,6,4]
+            },
+            {
+              'id':2,
+              'name':'Sedán',
+              'idLines':[12,11,5]
+            },
+            {
+              'id':3,
+              'name':'SUV',
+              'idLines':[8,9,10]
+            },
+            {
+              'id':4,
+              'name':'Pick-Up',
+              'idLines':[7,1]
+            },
+          ]          
+        },
+        {
+          'id':8 ,
+          'description':'¿QUÉ TIPO DE EXPERIENCIA DISFRUTARÍAS MÁS CON TU PAREJA?',
+          'result':'',
+          'answers':[
+            {
+              'id':1,
+              'name':'Tener el poder y el control total que te brinda una caja mecánica, especialmente en carretera y terrenos montañosos',
+              'idLines':[3,12,2,6,11,7,5,8,1]
+            },
+            {
+              'id':2,
+              'name':'Cómoda y confortable en ciudad y carretera, teniendo la caja automática como protagonista',
+              'idLines':[3,12,6,11,5,8,10,1]
+            },            
+          ]          
+        },
+      ],        
+      vehiclesLines:[
+        {
+          id:1 ,
+          name:'AMAROK' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:2 ,
+          name:'FOX XTREME' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:3 ,
+          name:'GOL' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:4 ,
+          name:'GOLF' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:5 ,
+          name:'JETTA' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:6 ,
+          name:'POLO' ,
+          imgVehicle:'',
+          points:0,
+        },              
+        {
+          id:7 ,
+          name:'SAVEIRO' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:8 ,
+          name:'' ,
+          imgVehicle:'T-CROSS',
+          points:0,
+        },
+        {
+          id:9 ,
+          name:'TIGUAN' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:10 ,
+          name:'TOUAREG' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:11,
+          name:'VIRTUS' ,
+          imgVehicle:'',
+          points:0,
+        },
+        {
+          id:12 ,
+          name:'VOYAGE' ,
+          imgVehicle:'',
+          points:0,
+        },        
+      ],
+      element:{
+          nombres:'',
+          apellidos:'',
+          email:'',
+          celular:'',
+          vehiculoFinal:[],
+          acepto:'',
+          aceptoInformación:'',
+      },
     }
   },
-  methods: {  
+  methods: {      
+    qualification(){             
+       for(let itemQ of this.questions){
+         for(let itemA of itemQ.answers){
+           if(itemQ.result === itemA.id){
+             for(let itemIds of itemA.idLines){
+               for(let itemVeh of this.vehiclesLines){
+                 if(itemVeh.id === itemIds){
+                   itemVeh.points += 1;
+                 }
+               }
+             }
+           }
+         }
+       }
+       var order = this.vehiclesLines.sort(function(a, b){         
+          if (a.points > b.points) {
+            return -1;
+          }        
+       });              
+       this.element.vehiculoFinal = order[0];
+    },
     stepOne(){
        window.$('#pills-1-tab').click();       
     },    
@@ -320,7 +616,8 @@ export default {
     },
     stepNine(){
        window.$('#pills-9-tab').click();       
-    },
+       this.qualification();
+    },    
     SendInfo(){
         var url = 'http://ad.test.bellpi.co/api/v1/external/lead/landings/add';
         // var url = 'https://pokeapi.co/api/v2/pokemon/ditto';
@@ -335,3 +632,76 @@ export default {
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1 repuesta 1 = [12,3,2]
+1 repuesta 2 = [6,8,11]
+1 repuesta 3 = [5,9,4]
+1 repuesta 4 = [7,1,9,8,10]
+
+2 repuesta 1 = [3,12,6,7]
+2 repuesta 2 = [9,10,8,4,5,11]
+2 repuesta 3 = [5,10,8,11,9,4]
+2 repuesta 4 = [2,1,9]
+2 repuesta 5 = [9,10,8]
+
+3 repuesta 1 = [3,6,11,8,12,2]
+3 repuesta 2 = [5,4,8,9,10]
+3 repuesta 3 = [12,8,9,11,5]
+3 repuesta 4 = [7,1]
+
+4 repuesta 1 = [3,6,4,2]
+4 repuesta 2 = [7,9,10,8,1]
+4 repuesta 3 = [12,5,6,11,9]
+
+5 repuesta 1 = [3,4,6,11,5,12,7,2]
+5 repuesta 2 = [9,10,8,1]
+
+6 repuesta 1 = [3,4]
+6 repuesta 2 = [12,11,7,9,10,8,1]
+6 repuesta 3 = [5,6,9,10,8]
+6 repuesta 4 = [5,4,6,9,10]
+
+7 repuesta 1 = [3,2,6,4]
+7 repuesta 2 = [12,11,5]
+7 repuesta 3 = [8,9,10]
+7 repuesta 4 = [7,1]
+
+8 repuesta 1 = [3,12,2,6,11,7,5,8,1]
+8 repuesta 1 = [3,12,6,11,5,8,10,1]
