@@ -2,7 +2,7 @@
   <div class="container-fluid p-0">    
     <Header></Header>
     <div v-show="!show" class="row">
-      <div class="col-4 bg-secondary h-1-pag"></div>
+      <div class="col-4 bg-secondary h-1-pag"><img src="./assets/logo.png" alt="definir" width="500" height="600"></div>
       <div class="col-1 bg-warning h-1-pag"></div>
       <div class="col-7 bg-success h-1-pag"></div>
       <div class="col-12 bg-info h-2-pag">

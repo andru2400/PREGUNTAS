@@ -183,28 +183,32 @@
               <div class="row">
                 <div class="col bg-info">
                     <h6>El carro recomendado para ti es ...</h6>                
-                    <span v-text="this.element.vehiculoFinal.name"></span>
+                    <span v-text="element.vehiculoFinal.name"></span>
+                    <img v-if="element.vehiculoFinal.imgVehicle" :src="require('../'+element.vehiculoFinal.imgVehicle)">                    
                 </div>
                 <div class="col bg-primary">
                     <form action="accion.php" method="post">
                         <h6>INGRESA TUS DATOS DE CONTACTO Y CONOCE LOS DIFERENTES PLANES PARA OBTENERLO</h6>                
                         <div class="form-group">                            
-                            <input type="text" class="form-control" v-model="element.nombres" id="formGroupExampleInput" placeholder="Nombres">
+                            <input type="text" class="form-control" v-model="element.nombres" id="formGroupExampleInput" placeholder="Nombres*">
+                            <span v-if="validarNombre" v-text="validarNombre"></span>
+                        </div>                             
+                        <div class="form-group">                            
+                            <input type="text" class="form-control" v-model="element.apellidos" id="formGroupExampleInput" placeholder="Apellidos*">
+                            <span v-if="validarApellido" v-text="validarApellido"></span>
                         </div>
                         <div class="form-group">                            
-                            <input type="text" class="form-control" v-model="element.apellidos" id="formGroupExampleInput" placeholder="Apellidos">
+                            <input type="email" class="form-control" v-model="element.email" id="formGroupExampleInput2" placeholder="Email*">
+                            <span v-if="validarEmail" v-text="validarEmail"></span>
                         </div>
                         <div class="form-group">                            
-                            <input type="email" class="form-control" v-model="element.email" id="formGroupExampleInput2" placeholder="Email">
-                        </div>
-                        <div class="form-group">                            
-                            <input type="text" class="form-control"  v-model="element.celular" id="formGroupExampleInput2" placeholder="Celular">
+                            <input type="text" class="form-control"  v-model="element.celular" id="formGroupExampleInput2" placeholder="Celular*">
+                            <span v-if="validarCelular" v-text="validarCelular"></span>
                         </div>
                         <input type="checkbox" class="" v-model="element.acepto"> Autorizo el uso de mis datos...
                         <input type="checkbox" class="" v-model="element.aceptoInformación"> Acepto recibir ...
                         <button type="button" class="btn btn-dark" v-on:click="SendInfo()">Enviar</button>
-                        <!-- <input type="submit" class="btn btn-dark" value="enviar"> -->
-                        <input type="button" class="btn btn-dark" @click="qualification()" value="enviar">
+                        <!-- <input type="submit" class="btn btn-dark" value="enviar"> -->                        
                     </form>
                 </div>                
               </div>                          
@@ -269,7 +273,7 @@
           </li>
             <!-- <div class="line-s-number"></div> -->
           <li class="nav-item" role="presentation" v-if="questions[7].result">
-            <a class="nav-link rounded-circle" id="pills-9-tab" data-toggle="pill" href="#pills-9" role="tab" aria-controls="pills-9" aria-selected="false">9</a>
+            <a class="nav-link rounded-circle" id="pills-9-tab" data-toggle="pill" href="#pills-9" role="tab" aria-controls="pills-9" aria-selected="false" @click="qualification()">9</a>
           </li>
           <li class="nav-item" role="presentation" v-else>
             <a class="nav-link rounded-circle" >9</a>
@@ -487,73 +491,73 @@ export default {
         {
           id:1 ,
           name:'AMAROK' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:2 ,
           name:'FOX XTREME' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:3 ,
           name:'GOL' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:4 ,
           name:'GOLF' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:5 ,
           name:'JETTA' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:6 ,
           name:'POLO' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },              
         {
           id:7 ,
           name:'SAVEIRO' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:8 ,
-          name:'' ,
-          imgVehicle:'T-CROSS',
+          name:'T-CROSS' ,
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:9 ,
           name:'TIGUAN' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:10 ,
           name:'TOUAREG' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:11,
           name:'VIRTUS' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },
         {
           id:12 ,
           name:'VOYAGE' ,
-          imgVehicle:'',
+          imgVehicle:'assets/logo.png',
           points:0,
         },        
       ],
@@ -566,10 +570,22 @@ export default {
           acepto:'',
           aceptoInformación:'',
       },
+      validarNombre:'',
+      validarApellido:'',
+      validarEmail:'',
+      validarCelular:'',
+
+    
     }
   },
   methods: {      
     qualification(){             
+
+      this.element.vehiculoFinal = [];
+      for(let itemVehReset of this.vehiclesLines){
+        itemVehReset.points = 0;
+      }
+
        for(let itemQ of this.questions){
          for(let itemA of itemQ.answers){
            if(itemQ.result === itemA.id){
@@ -588,10 +604,12 @@ export default {
             return -1;
           }        
        });              
+       console.log(order);
        this.element.vehiculoFinal = order[0];
     },
     stepOne(){
        window.$('#pills-1-tab').click();       
+
     },    
     stepTwo(){
        window.$('#pills-2-tab').click();       
@@ -618,7 +636,41 @@ export default {
        window.$('#pills-9-tab').click();       
        this.qualification();
     },    
-    SendInfo(){
+    SendInfo(){                
+        var validateError = false;
+
+        if(!this.element.nombres){
+          this.validarNombre = "Obligatorio";
+          validateError = true;
+        }else{
+          this.validarNombre = "";
+        }
+        
+        if(!this.element.apellidos){
+          this.validarApellido = "Obligatorio";
+          validateError = true;
+        }else{
+          this.validarApellido = "";
+        }
+
+        if(!this.element.email){
+          this.validarEmail = "Obligatorio";
+          validateError = true;
+        }else{
+          this.validarEmail = "";
+        }
+
+        if(!this.element.celular){
+          this.validarCelular = "Obligatorio";
+          validateError = true;
+        }else{
+          this.validarCelular = "";
+        }
+
+        if(validateError){
+          return;
+        }
+
         var url = 'http://ad.test.bellpi.co/api/v1/external/lead/landings/add';
         // var url = 'https://pokeapi.co/api/v2/pokemon/ditto';
         window.axios.post(url)
@@ -632,76 +684,3 @@ export default {
   }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1 repuesta 1 = [12,3,2]
-1 repuesta 2 = [6,8,11]
-1 repuesta 3 = [5,9,4]
-1 repuesta 4 = [7,1,9,8,10]
-
-2 repuesta 1 = [3,12,6,7]
-2 repuesta 2 = [9,10,8,4,5,11]
-2 repuesta 3 = [5,10,8,11,9,4]
-2 repuesta 4 = [2,1,9]
-2 repuesta 5 = [9,10,8]
-
-3 repuesta 1 = [3,6,11,8,12,2]
-3 repuesta 2 = [5,4,8,9,10]
-3 repuesta 3 = [12,8,9,11,5]
-3 repuesta 4 = [7,1]
-
-4 repuesta 1 = [3,6,4,2]
-4 repuesta 2 = [7,9,10,8,1]
-4 repuesta 3 = [12,5,6,11,9]
-
-5 repuesta 1 = [3,4,6,11,5,12,7,2]
-5 repuesta 2 = [9,10,8,1]
-
-6 repuesta 1 = [3,4]
-6 repuesta 2 = [12,11,7,9,10,8,1]
-6 repuesta 3 = [5,6,9,10,8]
-6 repuesta 4 = [5,4,6,9,10]
-
-7 repuesta 1 = [3,2,6,4]
-7 repuesta 2 = [12,11,5]
-7 repuesta 3 = [8,9,10]
-7 repuesta 4 = [7,1]
-
-8 repuesta 1 = [3,12,2,6,11,7,5,8,1]
-8 repuesta 1 = [3,12,6,11,5,8,10,1]
